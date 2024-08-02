@@ -1,4 +1,4 @@
-function containsSQLKeywords(text: string): boolean {
+function containsSqlInjections(text: string): boolean {
     const sqlKeywords = [
         'SELECT', 'UPDATE', 'DELETE', 'INSERT', 'DROP', 'ALTER', 'CREATE', 'FROM *',  
         'EXECUTE', 'TRUNCATE', 'RENAME', 'GRANT', 'REVOKE', 'UNION', '--', '#', ';'
@@ -9,4 +9,4 @@ function containsSQLKeywords(text: string): boolean {
     return regex.test(text);
 }
 
-export {containsSQLKeywords}
+export {containsSqlInjections}
