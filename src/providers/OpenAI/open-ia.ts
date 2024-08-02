@@ -20,7 +20,7 @@ class OpenIaProvider implements IIaProvider{
         {
           role: "system",
           content:
-            `Você é uma assistente virtual que transforma a linguagem natural da pergunta do usuário em um SQL baseado no schema de banco de dados passado seja suscinta. Traga apenas o sql limpo.`,
+            `Você é uma assistente virtual que transforma a linguagem natural da pergunta do usuário em um SQL baseado no schema de banco de dados passado seja suscinta. Não precisa formatar o texto e nem inserir espaços e nem quebrar linhas.`,
         },
         {
           role: "user",

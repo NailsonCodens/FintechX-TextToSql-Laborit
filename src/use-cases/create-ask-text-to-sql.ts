@@ -22,25 +22,20 @@ class CreateAskTextToSqlUseCase{
         }
 
         const schemaContext = await this.dataBaseRepository.showTablesEstructure()
-        console.log(schemaContext)
 
-        /*estructuresTable, 'Quais são os produtos mais vendidos em termos de quantidade?' */
-        const responseTextToSql = await this.iaProvider.generateResponseSql({schemaContext, request: 'Quais são os produtos mais populares entre os clientes corporativos?'})
-        console.log(responseTextToSql)
+        const responseTextToSql = await this.iaProvider.generateResponseSql({schemaContext, request: question})
 
+
+        const resultTextToSql = sanitizeText(responseTextToSql)
+        
         if(result){
             console.log('exibir os resultados esperados')
         }
 
         return {
-            sql: responseTextToSql
+            sql: resultTextToSql,
+            result: result ? '' : 'Os dados não foram mostrados pois  a opção result não foi setada para true.'
         }        
-      
-//        return schema;
-
- /*       const responseTextToSql = await this.iaProvider.generateResponseSql()
-        console.log(responseTextToSql)
-        return 'working'*/
     }
 }
 
