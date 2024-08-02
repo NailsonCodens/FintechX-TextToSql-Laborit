@@ -10,3 +10,4 @@ function sanitizeText(text: string): string {
     return sanitized;
 }
 
+export {sanitizeText}

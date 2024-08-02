@@ -2,10 +2,16 @@ import { IIaProvider } from "@/providers/i-ia"
 import { IDataBaseRepository } from "@/repositories/i-data-base-repository"
 import { containsSQLKeywords } from "@/utils/anti-injection"
 import { sqlInjection } from "./errors/sql-injection"
+import { sanitizeText } from "@/utils/sanitize"
 
 interface CreateAskTextSqlUseCaseRequest {
     question: string
     result: boolean
+}
+
+interface CreateAskTextSqlUseCaseResponse<T>{
+    sql: string
+    result: Array<T>  | null
 }
 
 class CreateAskTextToSqlUseCase{
@@ -14,7 +20,7 @@ class CreateAskTextToSqlUseCase{
         this.dataBaseRepository = dataBaseRepository
     }
 
-    async execute({question, result}: CreateAskTextSqlUseCaseRequest){
+    async execute({question, result}: CreateAskTextSqlUseCaseRequest): Promise<CreateAskTextSqlUseCaseResponse>{
         const sqlInjectionExists = containsSQLKeywords(question);
 
         if(sqlInjectionExists){
@@ -27,14 +33,14 @@ class CreateAskTextToSqlUseCase{
 
 
         const resultTextToSql = sanitizeText(responseTextToSql)
-        
+
         if(result){
             console.log('exibir os resultados esperados')
         }
 
         return {
             sql: resultTextToSql,
-            result: result ? '' : 'Os dados não foram mostrados pois  a opção result não foi setada para true.'
+            result: result ? '' : null
         }        
     }
 }
