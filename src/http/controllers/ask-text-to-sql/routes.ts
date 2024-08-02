@@ -1,5 +1,5 @@
 import { FastifyInstance } from "fastify";
-import { CreateAskToSqlController } from "./create";
+import { CreateAskToSqlController } from "./create-ask-controller";
 
 const createAskTextToSqlController = new CreateAskToSqlController()
 
