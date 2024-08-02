@@ -1,8 +1,9 @@
 import { IIaProvider } from "@/providers/i-ia"
 import { IDataBaseRepository } from "@/repositories/i-data-base-repository"
-import { sqlInjection } from "./errors/sql-injection"
+import { SqlInjection } from "./errors/sql-injection"
 import { sanitizeText } from "@/utils/sanitize"
 import { containsSqlInjections } from "@/utils/anti-injection"
+import { NullGenerateSqlResponse } from "./errors/null-generate-sql-response"
 
 interface CreateAskTextSqlUseCaseRequest {
     question: string
@@ -24,7 +25,7 @@ class CreateAskTextToSqlUseCase{
         const sqlInjectionExists = containsSqlInjections(question);
 
         if(sqlInjectionExists){
-            throw new sqlInjection()  
+            throw new SqlInjection()  
         }
 
         const schemaContext = await this.dataBaseRepository.showTablesEstructure()
@@ -32,7 +33,8 @@ class CreateAskTextToSqlUseCase{
         const responseTextToSql = await this.iaProvider.generateResponseSql({schemaContext, request: question})
 
         if(!responseTextToSql){
-            //lanca erro aqui 
+            throw new NullGenerateSqlResponse();
+            
         }
 
         const resultTextToSql = sanitizeText(responseTextToSql)
