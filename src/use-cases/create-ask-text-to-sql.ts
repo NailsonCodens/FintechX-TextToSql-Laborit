@@ -12,7 +12,7 @@ interface CreateAskTextSqlUseCaseRequest {
 
 interface CreateAskTextSqlUseCaseResponse{
     sql: string
-    result: Array<any> | null
+    result: any | null
 }
 
 class CreateAskTextToSqlUseCase{
@@ -34,18 +34,20 @@ class CreateAskTextToSqlUseCase{
 
         if(!responseTextToSql){
             throw new NullGenerateSqlResponse();
-            
         }
 
         const resultTextToSql = sanitizeText(responseTextToSql)
 
+        let resultQueryGenereted: any[] | unknown = []
+
         if(result){
-            console.log('exibir os resultados esperados')
+            
         }
+        resultQueryGenereted = result ? await this.dataBaseRepository.showResultOftheQueryGenereted(responseTextToSql) : null
 
         return {
             sql: resultTextToSql,
-            result: result ? [] : null
+            result: resultQueryGenereted
         }        
     }
 }

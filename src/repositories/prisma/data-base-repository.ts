@@ -40,6 +40,12 @@ class DataBaseRepository implements IDataBaseRepository{
 
         return schema;
     }
+
+    async showResultOftheQueryGenereted(query: string){        
+        const result = await prisma.$queryRawUnsafe(query)
+
+        return result
+    }    
 }
 
 export {DataBaseRepository}

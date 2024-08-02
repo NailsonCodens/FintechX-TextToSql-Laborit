@@ -2,7 +2,7 @@ import "dotenv/config";
 import fastify from "fastify";
 import { askTextToSqlRoutes } from "@/http/controllers/ask-text-to-sql/routes";
 import { ZodError } from "zod";
-import { AiError, OpenAiError } from "./providers/errors/openAi";
+import { AiError } from "./providers/errors/openAi";
 
 export const app = fastify()
 
