@@ -27,7 +27,7 @@ class OpenIaProvider implements IIaProvider{
           content: prompt
         },
       ],
-      model: 'gpt-4o',
+      model: String(process.env.MODEL),
       temperature: 0.4,
     })
 

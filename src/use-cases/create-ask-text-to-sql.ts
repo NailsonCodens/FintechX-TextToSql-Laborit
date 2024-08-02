@@ -1,5 +1,11 @@
 import { IIaProvider } from "@/providers/i-ia"
 import { IDataBaseRepository } from "@/repositories/i-data-base-repository"
+import { containsSQLKeywords } from "@/utils/anti-injection"
+
+interface CreateAskTextSqlUseCaseRequest {
+    question: string
+    result: boolean
+}
 
 class CreateAskTextToSqlUseCase{
     constructor(private dataBaseRepository: IDataBaseRepository, private iaProvider: IIaProvider){
@@ -7,7 +13,14 @@ class CreateAskTextToSqlUseCase{
         this.dataBaseRepository = dataBaseRepository
     }
 
-    async execute(){
+    async execute({question, result}: CreateAskTextSqlUseCaseRequest){
+        const antiInjection = containsSQLKeywords(question);
+
+        if(antiInjection){
+            console.log('nao posso prosseguir')
+            throw new Error("Não posso prosseguir pois existem códigos maliciosos na sua pergunta.");
+            
+        }
 
         const schemaContext = await this.dataBaseRepository.showTablesEstructure()
         console.log(schemaContext)
