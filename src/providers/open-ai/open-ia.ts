@@ -1,6 +1,6 @@
 import OpenAI from "openai";
 import { generateResponseSqlProps, IIaProvider } from "../i-ia";
-import { OpenAiError } from "./errors/openAi";
+import { AiError } from "../errors/openAi";
 
 class OpenIaProvider implements IIaProvider{
   private openAi: OpenAI;
@@ -14,6 +14,7 @@ class OpenIaProvider implements IIaProvider{
   async generateResponseSql({schemaContext, request}: generateResponseSqlProps){
     try {
       const context = JSON.stringify(schemaContext);
+  
       const prompt = `${context} este é o schema do meu banco de dados, baseado nisto responda transformando a linguagem na atual em sql. A pergunta é: ${request}`;
   
       const responseIA = await this.openAi.chat.completions.create({
@@ -36,7 +37,7 @@ class OpenIaProvider implements IIaProvider{
       return response;        
 
     } catch (error) {
-      throw new OpenAiError('Ops! Houve uma falhar na integração com o modelo de LLM. Por favor contate os administradores para resolver a questão', 400);
+      throw new AiError('Ops! Houve uma falhar na integração com o modelo de LLM. Por favor contate os administradores para resolver a questão', 400);
     }
   }
 }

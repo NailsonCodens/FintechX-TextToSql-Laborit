@@ -17,7 +17,7 @@ class DataBaseRepository implements IDataBaseRepository{
         WHERE TABLE_SCHEMA = ${process.env.DB_DATABASE}
         `;
 
-        const tableNames = tables.map(table => table.TABLE_NAME);
+        const tableNames = tables.map((table: { TABLE_NAME: any; }) => table.TABLE_NAME);
 
         // Obter colunas para todas as tabelas
         const columns = await prisma.$queryRaw<{
@@ -31,7 +31,7 @@ class DataBaseRepository implements IDataBaseRepository{
 
         const schema: { [table: string]: string[] } = {};
 
-        columns.forEach(column => {
+        columns.forEach((column: { TABLE_NAME: string | number; COLUMN_NAME: string; }) => {
         if (!schema[column.TABLE_NAME]) {
             schema[column.TABLE_NAME] = [];
         }
@@ -40,15 +40,6 @@ class DataBaseRepository implements IDataBaseRepository{
 
         return schema;
     }
-
-    async showTableColumns(tableName: string){
-        console.log(tableName, ' --- ')
-
-
-        /*if(tableName){
-            const columns = await prisma.$queryRaw`SHOW COLUMNS FROM ${tableName}`;    
-        }*/
-    }    
 }
 
 export {DataBaseRepository}

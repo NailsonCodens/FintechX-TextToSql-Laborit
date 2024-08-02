@@ -31,6 +31,9 @@ class CreateAskTextToSqlUseCase{
 
         const responseTextToSql = await this.iaProvider.generateResponseSql({schemaContext, request: question})
 
+        if(!responseTextToSql){
+            //lanca erro aqui 
+        }
 
         const resultTextToSql = sanitizeText(responseTextToSql)
 

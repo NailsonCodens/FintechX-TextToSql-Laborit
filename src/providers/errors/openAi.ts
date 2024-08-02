@@ -1,12 +1,12 @@
-class OpenAiError  extends Error{
-    public readonly openAiError: Error
+class AiError  extends Error{
+    public readonly aiError: Error
     public readonly statusCode: number
     
     constructor(error: any, statusCode: 400){
         super()
-        this.openAiError = error
+        this.aiError = error
         this.statusCode = statusCode
     }
 }
 
-export {OpenAiError}
+export {AiError}

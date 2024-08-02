@@ -4,7 +4,7 @@ export interface generateResponseSqlProps{
 }
 
 interface IIaProvider{
-    generateResponseSql({schemaContext, request}: generateResponseSqlProps): Promise<string>
+    generateResponseSql({schemaContext, request}: generateResponseSqlProps): Promise<string | null>
 }
 
 export {IIaProvider}

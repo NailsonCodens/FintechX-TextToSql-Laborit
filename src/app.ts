@@ -2,7 +2,7 @@ import "dotenv/config";
 import fastify from "fastify";
 import { askTextToSqlRoutes } from "@/http/controllers/ask-text-to-sql/routes";
 import { ZodError } from "zod";
-import { OpenAiError } from "./providers/OpenAI/errors/openAi";
+import { AiError, OpenAiError } from "./providers/errors/openAi";
 
 export const app = fastify()
 
@@ -15,9 +15,9 @@ app.setErrorHandler((error, _, reply) => {
         .send({ message: 'Validation error.', issues: error.format() })
     }
 
-    if(error instanceof OpenAiError){
-        const {openAiError, statusCode} = error
-        reply.status(statusCode).send({message: openAiError})
+    if(error instanceof AiError){
+        const {aiError, statusCode} = error
+        reply.status(statusCode).send({message: aiError})
     } 
 
     if(error instanceof Error){
