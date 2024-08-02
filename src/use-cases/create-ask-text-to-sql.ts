@@ -1,8 +1,8 @@
 import { IIaProvider } from "@/providers/i-ia"
 import { IDataBaseRepository } from "@/repositories/i-data-base-repository"
-import { containsSQLKeywords } from "@/utils/anti-injection"
 import { sqlInjection } from "./errors/sql-injection"
 import { sanitizeText } from "@/utils/sanitize"
+import { containsSqlInjections } from "@/utils/anti-injection"
 
 interface CreateAskTextSqlUseCaseRequest {
     question: string
@@ -21,7 +21,7 @@ class CreateAskTextToSqlUseCase{
     }
 
     async execute({question, result}: CreateAskTextSqlUseCaseRequest): Promise<CreateAskTextSqlUseCaseResponse>{
-        const sqlInjectionExists = containsSQLKeywords(question);
+        const sqlInjectionExists = containsSqlInjections(question);
 
         if(sqlInjectionExists){
             throw new sqlInjection()  
