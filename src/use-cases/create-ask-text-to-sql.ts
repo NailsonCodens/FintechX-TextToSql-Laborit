@@ -9,9 +9,9 @@ interface CreateAskTextSqlUseCaseRequest {
     result: boolean
 }
 
-interface CreateAskTextSqlUseCaseResponse<T>{
+interface CreateAskTextSqlUseCaseResponse{
     sql: string
-    result: Array<T>  | null
+    result: Array<any> | null
 }
 
 class CreateAskTextToSqlUseCase{
@@ -40,7 +40,7 @@ class CreateAskTextToSqlUseCase{
 
         return {
             sql: resultTextToSql,
-            result: result ? '' : null
+            result: result ? [] : null
         }        
     }
 }
