@@ -1,14 +1,27 @@
 import { IIaProvider } from "@/providers/i-ia"
+import { IDataBaseRepository } from "@/repositories/i-data-base-repository"
 
 class CreateAskTextToSqlUseCase{
-    constructor(private iaProvider: IIaProvider){
+    constructor(private dataBaseRepository: IDataBaseRepository, private iaProvider: IIaProvider){
         this.iaProvider = iaProvider
+        this.dataBaseRepository = dataBaseRepository
     }
 
     async execute(){
-        const responseTextToSql = await this.iaProvider.generateResponseSql()
+
+        const schemaContext = await this.dataBaseRepository.showTablesEstructure()
+        console.log(schemaContext)
+
+        /*estructuresTable, 'Quais são os produtos mais vendidos em termos de quantidade?' */
+        const responseTextToSql = await this.iaProvider.generateResponseSql({schemaContext, request: 'Qual é o volume de vendas por cidade?'})
         console.log(responseTextToSql)
-        return 'working'
+        return 'working'        
+      
+//        return schema;
+
+ /*       const responseTextToSql = await this.iaProvider.generateResponseSql()
+        console.log(responseTextToSql)
+        return 'working'*/
     }
 }
 
