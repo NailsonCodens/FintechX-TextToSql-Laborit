@@ -1,8 +1,8 @@
 import OpenAI from "openai";
-import { generateResponseSqlProps, IIaProvider } from "../i-ia";
+import { generateResponseSqlProps, IAiProvider } from "../i-ai";
 import { AiError } from "../errors/openAi";
 
-class OpenIaProvider implements IIaProvider{
+class OpenIaProvider implements IAiProvider{
   private openAi: OpenAI;
 
   constructor() {

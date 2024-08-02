@@ -1,10 +1,10 @@
 export interface generateResponseSqlProps{
     schemaContext: string,
-    request: string
+    request: string,
 }
 
-interface IIaProvider{
+interface IAiProvider{
     generateResponseSql({schemaContext, request}: generateResponseSqlProps): Promise<string | null>
 }
 
-export {IIaProvider}
+export {IAiProvider}

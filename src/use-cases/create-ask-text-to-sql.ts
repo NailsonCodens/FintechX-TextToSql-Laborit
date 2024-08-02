@@ -1,4 +1,4 @@
-import { IIaProvider } from "@/providers/i-ia"
+import { IAiProvider } from "@/providers/i-ai"
 import { IDataBaseRepository } from "@/repositories/i-data-base-repository"
 import { SqlInjection } from "./errors/sql-injection"
 import { sanitizeText } from "@/utils/sanitize"
@@ -16,7 +16,7 @@ interface CreateAskTextSqlUseCaseResponse{
 }
 
 class CreateAskTextToSqlUseCase{
-    constructor(private dataBaseRepository: IDataBaseRepository, private iaProvider: IIaProvider){
+    constructor(private dataBaseRepository: IDataBaseRepository, private iaProvider: IAiProvider){
         this.iaProvider = iaProvider
         this.dataBaseRepository = dataBaseRepository
     }
@@ -40,9 +40,6 @@ class CreateAskTextToSqlUseCase{
 
         let resultQueryGenereted: any[] | unknown = []
 
-        if(result){
-            
-        }
         resultQueryGenereted = result ? await this.dataBaseRepository.showResultOftheQueryGenereted(responseTextToSql) : null
 
         return {
