@@ -13,7 +13,7 @@ class CreateAskTextToSqlUseCase{
         console.log(schemaContext)
 
         /*estructuresTable, 'Quais são os produtos mais vendidos em termos de quantidade?' */
-        const responseTextToSql = await this.iaProvider.generateResponseSql({schemaContext, request: 'Qual é o volume de vendas por cidade?'})
+        const responseTextToSql = await this.iaProvider.generateResponseSql({schemaContext, request: 'Quais são os produtos mais populares entre os clientes corporativos?'})
         console.log(responseTextToSql)
         return 'working'        
       
