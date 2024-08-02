@@ -1,6 +1,7 @@
 import { IIaProvider } from "@/providers/i-ia"
 import { IDataBaseRepository } from "@/repositories/i-data-base-repository"
 import { containsSQLKeywords } from "@/utils/anti-injection"
+import { sqlInjection } from "./errors/sql-injection"
 
 interface CreateAskTextSqlUseCaseRequest {
     question: string
@@ -14,12 +15,10 @@ class CreateAskTextToSqlUseCase{
     }
 
     async execute({question, result}: CreateAskTextSqlUseCaseRequest){
-        const antiInjection = containsSQLKeywords(question);
+        const sqlInjectionExists = containsSQLKeywords(question);
 
-        if(antiInjection){
-            console.log('nao posso prosseguir')
-            throw new Error("Não posso prosseguir pois existem códigos maliciosos na sua pergunta.");
-            
+        if(sqlInjectionExists){
+            throw new sqlInjection()  
         }
 
         const schemaContext = await this.dataBaseRepository.showTablesEstructure()
@@ -28,7 +27,14 @@ class CreateAskTextToSqlUseCase{
         /*estructuresTable, 'Quais são os produtos mais vendidos em termos de quantidade?' */
         const responseTextToSql = await this.iaProvider.generateResponseSql({schemaContext, request: 'Quais são os produtos mais populares entre os clientes corporativos?'})
         console.log(responseTextToSql)
-        return 'working'        
+
+        if(result){
+            console.log('exibir os resultados esperados')
+        }
+
+        return {
+            sql: responseTextToSql
+        }        
       
 //        return schema;
 
