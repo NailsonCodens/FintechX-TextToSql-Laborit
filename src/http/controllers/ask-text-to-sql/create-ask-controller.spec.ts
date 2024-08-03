@@ -12,27 +12,14 @@ describe('Create CheckIn (e2e)', () => {
   })
 
   it('should be able to create get a query genereted and result from this query genereted', async () => {
-/*
-    const gym = await prisma.gym.create({
-      data: {
-        title: 'JavaScript Gym',
-        latitude: -27.2892852,
-        longitude: -49.6401891,
-      },
-    })
 
     const response = await request(app.server)
-      .post(`/gyms/${gym.id}/check-ins`)
-      .set('Authorization', `Bearer ${token}`)
-      .send({
-        title: 'JavaScript Gym',
-        description: 'Some description',
-        phone: '1184381802',
-        latitude: -27.2892852,
-        longitude: -49.6401891,
-      })
+    .post('/ask')
+    .send({
+      question: 'Quais são os produtos que contem Ch no nome?',
+      result: true
+    })
 
     expect(response.statusCode).toEqual(201)
-    */
   })
 })

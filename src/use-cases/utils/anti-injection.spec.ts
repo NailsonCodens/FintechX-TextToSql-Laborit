@@ -1,4 +1,4 @@
-import { containsSqlInjections } from '@/utils/anti-injection';
+import { containsSqlInjections } from '@/use-cases/utils/anti-injection';
 import { describe, it, expect } from 'vitest';
 
 describe('Suite test sql anti injection', () => {

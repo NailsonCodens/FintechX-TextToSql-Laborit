@@ -10,12 +10,15 @@ class DataBaseRepository implements IDataBaseRepository{
     }
 
     async showTablesEstructure(){
+
+
         // Obter tabelas
         const tables = await prisma.$queryRaw<{ TABLE_NAME: string }[]>`
         SELECT TABLE_NAME
         FROM information_schema.TABLES
         WHERE TABLE_SCHEMA = ${process.env.DB_DATABASE}
         `;
+
 
         const tableNames = tables.map((table: { TABLE_NAME: any; }) => table.TABLE_NAME);
 

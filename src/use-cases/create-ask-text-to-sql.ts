@@ -1,9 +1,9 @@
 import { IAiProvider } from "@/providers/i-ai"
 import { IDataBaseRepository } from "@/repositories/i-data-base-repository"
 import { SqlInjection } from "./errors/sql-injection"
-import { sanitizeText } from "@/utils/sanitize"
-import { containsSqlInjections } from "@/utils/anti-injection"
 import { NullGenerateSqlResponse } from "./errors/null-generate-sql-response"
+import { containsSqlInjections } from "@/use-cases/utils/anti-injection"
+import { sanitizeText } from "@/use-cases/utils/sanitize"
 
 interface CreateAskTextSqlUseCaseRequest {
     question: string
@@ -35,6 +35,8 @@ class CreateAskTextToSqlUseCase{
         if(!responseTextToSql){
             throw new NullGenerateSqlResponse();
         }
+
+
 
         const resultTextToSql = sanitizeText(responseTextToSql)
 
