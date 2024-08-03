@@ -1,0 +1,84 @@
+{
+  "openapi": "3.0.0",
+  "info": {
+    "description": "Esta api transforma linguagem natural em sql pronto para uso com base no schema do banco de dados usado",
+    "version": "0.1.0",
+    "title": "Api Text2Sql Laborit",
+    "contact": {
+      "email": "webmaster@daju.com.br"
+    }
+  },
+  "servers": [
+    {
+      "url": "http://localhost:3000/",
+      "description": "Localhost (uses test data)"
+    }
+  ],
+  "tags": [
+    {
+      "name": "Ask",
+      "description": "Ask route"
+    }
+  ],
+  "paths": {
+    "/ask": {
+      "post": {
+        "tags": ["Ask"],
+        "summary": "Responde em sql uma pergunta em linguagem natural",
+        "description": "Esta rota vai entender sua pergunta, analisar o banco de dados o fornecer o melhor sql para responder sua pergunta e ainda fornecer os dados do sql quando o opcional result for true",
+        "requestBody": {
+          "description": "Parametros para serem enviados",
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "question": {
+                    "type": "string"
+                  },
+                  "result": {
+                    "type": "boolean"
+                  }
+                },
+                "example": {
+                  "query": "Quais são os 10 primeiro produtos?",
+                  "result": true
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "201": {
+            "description": "Resposta gerada pela ia com os resultados coletados no banco de dados",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "query": {
+                      "type": "number",
+                      "example": "SELECT * FROM products lIMIT 10"                                      
+                    },
+                    "result": {
+                      "type": "object",
+                      "example": {}                                           
+                    }
+                  }
+                }
+              }
+            }  
+          },
+        "responses": {
+          "201": {
+            "description": ""
+          },
+          "400": {
+            "description": "Bad Request - Parametros inválidos ou algum problema interno com api de terceiros"
+          }
+        }                
+      }
+    }
+    }
+  }  
+}

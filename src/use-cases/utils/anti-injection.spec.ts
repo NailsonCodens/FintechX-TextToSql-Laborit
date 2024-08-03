@@ -1,5 +1,5 @@
-import { containsSqlInjections } from '@/use-cases/utils/anti-injection';
 import { describe, it, expect } from 'vitest';
+import { containsSqlInjections } from './anti-injection';
 
 describe('Suite test sql anti injection', () => {
     it('should be able to return true for a string containing SQL keywords', () => {
