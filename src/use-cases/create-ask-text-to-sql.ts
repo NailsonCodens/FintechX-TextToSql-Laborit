@@ -5,6 +5,8 @@ import { NullGenerateSqlResponse } from "./errors/null-generate-sql-response"
 import { containsSqlInjections } from "@/use-cases/utils/anti-injection"
 import { sanitizeText } from "@/use-cases/utils/sanitize"
 import JSONbig from 'json-bigint';
+import { isSqlQuery } from "@/helper/isSqlQuery"
+import { IsNotSqlQuery } from "./errors/is-not-sql-query"
 
 
 interface CreateAskTextSqlUseCaseRequest {
@@ -38,7 +40,9 @@ class CreateAskTextToSqlUseCase{
             throw new NullGenerateSqlResponse();
         }
 
-
+        if(!isSqlQuery(responseTextToSql)){
+            throw new IsNotSqlQuery();
+        }
 
         const resultTextToSql = sanitizeText(responseTextToSql)
 

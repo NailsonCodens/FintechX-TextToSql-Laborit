@@ -6,6 +6,7 @@ import { NullGenerateSqlResponse } from "./errors/null-generate-sql-response";
 import { containsSqlInjections } from "@/use-cases/utils/anti-injection";
 import { sanitizeText } from "@/use-cases/utils/sanitize";
 import { CreateAskTextToSqlUseCase } from './create-ask-text-to-sql';
+import { IsNotSqlQuery } from './errors/is-not-sql-query';
 
 vi.mock('@/use-cases/utils/anti-injection');
 vi.mock('@/use-cases/utils/sanitize');
@@ -34,6 +35,22 @@ describe('CreateAskTextToSqlUseCase', () => {
     await expect(createAskTextToSqlUseCase.execute({ question: 'DROP TABLE users;', result: true }))
       .rejects
       .toThrow(SqlInjection);
+  });
+
+  it('should throw IsNotSqlQuery error if no valid SQL is generated', async () => {
+    // Mocking `containsSqlInjections` to return false
+    (containsSqlInjections as vi.Mock).mockReturnValue(false);
+
+    // Mocking `iaProvider.generateResponseSql` to return an invalid SQL or empty string
+    iaProvider.generateResponseSql.mockResolvedValue('NO SQL GENERATE');
+
+    // Ensure `sanitizeText` returns some sanitized string that would be invalid SQL
+    (sanitizeText as vi.Mock).mockReturnValue('');
+
+    // Expect the function to throw IsNotSqlQuery error
+    await expect(createAskTextToSqlUseCase.execute({ question: 'teste', result: true }))
+      .rejects
+      .toThrow(IsNotSqlQuery);
   });
 
   it('should throw NullGenerateSqlResponse error if responseTextToSql is null', async () => {
