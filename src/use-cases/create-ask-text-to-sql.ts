@@ -4,6 +4,8 @@ import { SqlInjection } from "./errors/sql-injection"
 import { NullGenerateSqlResponse } from "./errors/null-generate-sql-response"
 import { containsSqlInjections } from "@/use-cases/utils/anti-injection"
 import { sanitizeText } from "@/use-cases/utils/sanitize"
+import JSONbig from 'json-bigint';
+
 
 interface CreateAskTextSqlUseCaseRequest {
     question: string
@@ -44,9 +46,12 @@ class CreateAskTextToSqlUseCase{
 
         resultQueryGenereted = result ? await this.dataBaseRepository.showResultOftheQueryGenereted(responseTextToSql) : null
 
+        let jsonResponse = JSONbig.stringify(resultQueryGenereted);
+
+        jsonResponse = JSON.parse(jsonResponse)
         return {
             sql: resultTextToSql,
-            result: resultQueryGenereted
+            result: jsonResponse
         }        
     }
 }
