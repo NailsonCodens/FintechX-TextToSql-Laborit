@@ -93,9 +93,7 @@ npm run teste:e2e
 
 #### Arquivo Json para Insomnia e Postman para testar os end points da aplicação
 
-```
-
-```
+<a href="https://github.com/NailsonCodens/FintechX-TextToSql-Laborit/blob/main/laborit_test_insomnia.json" target="_blank">Endpoints.json</a>
 
 That is it! 
 
