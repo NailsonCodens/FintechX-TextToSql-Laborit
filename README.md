@@ -29,7 +29,7 @@
 
 #### Tech Stack
 
-![NodeJs](https://img.shields.io/badge/Node.js-43853D?style=for-the-badge&logo=node.js&logoColor=white) ![TypeScript](https://img.shields.io/badge/TypeScript-007ACC?style=for-the-badge&logo=typescript&logoColor=white) ![Prisma](https://img.shields.io/badge/Prisma-11394E?style=for-the-badge&logo=prisma&logoColor=white) ![Vitest](https://img.shields.io/badge/Vitest-70961E?style=for-the-badge&logo=vitest&logoColor=white) ![Axios](https://img.shields.io/badge/Axios-813F90?style=for-the-badge&logo=axios&logoColor=white) ![Zod](https://img.shields.io/badge/Zod-264B7E?style=for-the-badge&logo=zod&logoColor=white) ![Mysql](https://img.shields.io/badge/MySql-F7A017?style=for-the-badge&logo=mysql&logoColor=00516A) ![Docker](https://img.shields.io/badge/Docker-2496ED?style=for-the-badge&logo=docker&logoColor=white) 
+![NodeJs](https://img.shields.io/badge/Node.js-43853D?style=for-the-badge&logo=node.js&logoColor=white) ![TypeScript](https://img.shields.io/badge/TypeScript-007ACC?style=for-the-badge&logo=typescript&logoColor=white) ![Prisma](https://img.shields.io/badge/Prisma-11394E?style=for-the-badge&logo=prisma&logoColor=white) ![Vitest](https://img.shields.io/badge/Vitest-70961E?style=for-the-badge&logo=vitest&logoColor=white) ![Axios](https://img.shields.io/badge/Axios-813F90?style=for-the-badge&logo=axios&logoColor=white) ![Zod](https://img.shields.io/badge/Zod-264B7E?style=for-the-badge&logo=zod&logoColor=white) ![Mysql](https://img.shields.io/badge/MySql-F7A017?style=for-the-badge&logo=mysql&logoColor=00516A) ![Docker](https://img.shields.io/badge/Docker-2496ED?style=for-the-badge&logo=docker&logoColor=white)
 
 
 
@@ -47,13 +47,14 @@ https://github.com/NailsonCodens/FintechX-TextToSql-Laborit.git
 npm install
 ```
 
-#### Faça uma cópia do .env.example ae renomei a copia para .env
+#### Faça uma cópia do .env.example e renomei a copia para .env
 
 ```
 sudo cp .env.example .env
 ```
 
 #### Adicione os valores das variaveis necessárias
+
 Você receberá os dados de producão em seu e-mail. Qualquer coisa, mande um e-mail para nailson.ivs@gmail.com e solicite as informações de produção.
 ```
 #enviroment
