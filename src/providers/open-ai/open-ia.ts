@@ -6,6 +6,13 @@ class OpenIaProvider implements IAiProvider{
   private openAi: OpenAI;
 
   constructor() {
+    const apiKey = process.env.KEY_IA;
+    const model = process.env.MODEL;
+
+    if (!apiKey || !model) {
+      throw new Error("API key or model environment variable is missing.");
+    }
+
     this.openAi = new OpenAI({
       apiKey: process.env.KEY_IA,
     });

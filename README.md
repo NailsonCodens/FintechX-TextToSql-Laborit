@@ -90,6 +90,19 @@ docker compose up
 npx prisma migrate deploy
 npm run teste:e2e
 ```
+### Documentação em:
+
+#### Em desenvolvimento
+
+http://localhost/
+
+#### Em produção
+https://texttosqltest.codens.com.br/
+
+#### Para produção, não esquecer de rodar
+```
+npm run build
+```
 
 #### Arquivo Json para Insomnia e Postman para testar os end points da aplicação
 
