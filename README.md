@@ -10,7 +10,7 @@
 
 </div>
 
-<h1 align="center"> Getting Started</h1> 
+<h1 align="center"> Ponto de Partida </h1> 
 
 <p align="center">O Software foi desenvolvido com a intenção de trazer agilidade e automoção para a empresa FintechX na coleta de dados e indicadores da sua base de dados para tomadas de decisões acertivas.</P>
 
@@ -19,7 +19,7 @@
 
 
 
-## Setup application
+## Setup da aplicação
 
 - NodeJs 18:00 ou superior ✅;
 - TypeScript ✅;
